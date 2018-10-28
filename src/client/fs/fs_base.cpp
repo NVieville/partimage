@@ -730,10 +730,10 @@ int CFSBase::getStdInfos(char *szDest, int nMaxLen, bool bShowBlocksInfo)
 
   if (bShowBlocksInfo)
     {
-      SNPRINTF(szBlocksInfo, i18n("Block size:...................%"PRIu64" bytes\n"
-				  "Total blocks count:...........%"PRIu64"\n"
-				  "Used blocks count:............%"PRIu64"\n"
-				  "Free blocks count:............%"PRIu64"\n"),
+      SNPRINTF(szBlocksInfo, i18n("Block size:...................%" PRIu64 " bytes\n"
+				  "Total blocks count:...........%" PRIu64 "\n"
+				  "Used blocks count:............%" PRIu64 "\n"
+				  "Free blocks count:............%" PRIu64 "\n"),
 	       m_header.qwBlockSize, 
 	       m_header.qwBlocksCount,
 	       m_header.qwUsedBlocks,
@@ -745,7 +745,7 @@ int CFSBase::getStdInfos(char *szDest, int nMaxLen, bool bShowBlocksInfo)
     }
  
   snprintf(szDest, nMaxLen, i18n("%s" // Blocks infos
-				 "Space usage:..................%"PRIu64" %%\n"
+				 "Space usage:..................%" PRIu64 " %%\n"
 				 "Used space:...................%s\n"
 				 "Free space:...................%s\n"
 				 "Bitmap size:..................%s\n"

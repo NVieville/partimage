@@ -341,7 +341,7 @@ int CSaveOptWindow::create(char *szImageFile, COptions options)
   m_labelSplit = newtLabel(1, 12, i18n("Image split mode"));
   m_radioSplitAuto = newtRadiobutton(1, 13, i18n("Automatic split (when no space left)"), !options.qwSplitSize, NULL);
   m_radioSplitSize = newtRadiobutton(1, 14, i18n("Into files whose size is:............"), !!options.qwSplitSize, m_radioSplitAuto);
-  SNPRINTF(szTemp, "%"PRIu64"", (!!options.qwSplitSize) ? (options.qwSplitSize/1024/1024) : 2048);
+  SNPRINTF(szTemp, "%" PRIu64 "", (!!options.qwSplitSize) ? (options.qwSplitSize/1024/1024) : 2048);
   m_editSplitSize = newtEntry(43, 14, szTemp, 8, NULL, 0);
   m_labelSplitSizeKB = newtLabel(52, 14, i18n("MiB"));
   m_checkSplitWait = newtCheckbox(1, 15, i18n("Wait after each volume change"), (!!options.bSplitWait ? 'X' : ' '), " X", NULL);
@@ -462,7 +462,7 @@ int CSavingWindow::create(const char *szDevice, const char *szImageFile, const c
   SNPRINTF(szTemp, i18n("Partition to save:...........%s"), szDevice);
   m_labelPartition = newtLabel(1, 0, szTemp);
   
-  SNPRINTF(szTemp, i18n("Size of the Partition:.......%s = %"PRIu64" bytes"), formatSize(qwPartSize, szTemp2), qwPartSize);
+  SNPRINTF(szTemp, i18n("Size of the Partition:.......%s = %" PRIu64 " bytes"), formatSize(qwPartSize, szTemp2), qwPartSize);
   m_labelPartitionSize = newtLabel(1, 1, szTemp);
   
   SNPRINTF(szTemp, i18n("Image file to create:........%s"), szImageFile);
@@ -610,7 +610,7 @@ void CSavingWindow::showImageFileInfo(char *szImageFile, QWORD qwFreeSpace, QWOR
       newtLabelSetText(m_labelImageFileSize, szTemp);
     }
   
-  SNPRINTF (szTemp, i18n("Available space for image:...%s = %"PRIu64" bytes"), formatSize(qwFreeSpace, szTemp2), qwFreeSpace);
+  SNPRINTF (szTemp, i18n("Available space for image:...%s = %" PRIu64 " bytes"), formatSize(qwFreeSpace, szTemp2), qwFreeSpace);
   newtLabelSetText(m_labelFreeSpace, szTemp);
 
   //option -B gui=no
@@ -734,7 +734,7 @@ int CRestoringWindow::create(char *szDevice, char *szImageFile, QWORD qwCurPartS
   SNPRINTF(szTemp, i18n("Partition to restore:.............%s"), szDevice);
   m_labelPartition = newtLabel(1, 0, szTemp);
   
-  SNPRINTF(szTemp, i18n("Size of partition to restore:.....%s = %"PRIu64" bytes"), formatSize(qwCurPartSize, szTemp2), qwCurPartSize);
+  SNPRINTF(szTemp, i18n("Size of partition to restore:.....%s = %" PRIu64 " bytes"), formatSize(qwCurPartSize, szTemp2), qwCurPartSize);
   m_labelPartitionSize = newtLabel(1, 1, szTemp);
   
   SNPRINTF(szTemp, i18n("Image file to use:................%s"), szImageFile);
@@ -751,7 +751,7 @@ int CRestoringWindow::create(char *szDevice, char *szImageFile, QWORD qwCurPartS
   SNPRINTF(szTemp, i18n("Image created on:.................%s\n"), asctime_portable(&dateCreate));
   m_labelDate = newtLabel(1, 6, szTemp);
 
-  SNPRINTF(szTemp, i18n("Size of the original partition:...%s = %"PRIu64" bytes"), formatSize(qwOrigPartSize, szTemp2), qwOrigPartSize);
+  SNPRINTF(szTemp, i18n("Size of the original partition:...%s = %" PRIu64 " bytes"), formatSize(qwOrigPartSize, szTemp2), qwOrigPartSize);
   m_labelOriginalPartitionSize = newtLabel(1, 7, szTemp);
 
   // stats

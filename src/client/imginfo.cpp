@@ -111,7 +111,7 @@ void imageInfoShowMBR(char *szText, int nMaxTextLen, int i, CMbr *mbr)
 {
   snprintf(szText, nMaxTextLen, i18n("-------------------- MBR %.3d -------------------\n"
 				     "Device:................%s\n"
-				     "Device blocks count:...%"PRIu64"\n"
+				     "Device blocks count:...%" PRIu64 "\n"
 				     "Device model:..........%s\n\n"),
 	   i, mbr->szDevice, mbr->qwBlocksCount, mbr->szDescModel);
 }
@@ -153,7 +153,7 @@ void imageInfoShowVolume(char *szText, int nMaxTextLen, CVolumeHeader *head, cha
   snprintf(szText, nMaxTextLen, i18n("Volume number:.........%u\n"
 				     "Volume size:...........%s\n"
 				     "Compression level: ....%d -> %s\n"
-				     "Identificator:.........%"PRIu64"=%"PRIX64"\n\n"),
+				     "Identificator:.........%" PRIu64 "=%" PRIX64 "\n\n"),
 	   head->dwVolumeNumber, formatSize(qwImageSize, cTemp), dwCompression, 
 	   szCompression, head->qwIdentificator, head->qwIdentificator);
 }

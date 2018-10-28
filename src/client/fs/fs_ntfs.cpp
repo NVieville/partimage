@@ -312,7 +312,7 @@ void CNtfsPart::printfInformations()
 			    "Bytes per sector:.............%u\n"
 			    "Sectors per cluster:..........%u\n"
 			    "File record size:.............%u\n"
-			    "LCN of MFT Data attrib:.......%"PRIu64"\n"),
+			    "LCN of MFT Data attrib:.......%" PRIu64 "\n"),
 	   szText, m_info.nBytesPerSector, m_info.cSectorsPerCluster, 
 	   m_info.dwFileRecordSize, m_info.qwLCNOfMftDataAttrib);
     
@@ -730,7 +730,7 @@ void CNtfsRunList::show()
   QWORD i;
   
   for (i=0L; i < m_qwClustersCount; i++)
-    fprintf(stderr, "cluster[%llu] = %"PRIu64"\n", (long long unsigned int)i, m_qwOffset[i]);
+    fprintf(stderr, "cluster[%llu] = %" PRIu64 "\n", (long long unsigned int)i, m_qwOffset[i]);
   
 }
 

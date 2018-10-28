@@ -142,10 +142,10 @@ void CHfsPart::printfInformations()
   getStdInfos(szText, sizeof(szText), true);
   
   SNPRINTF(szFullText, i18n("%s" // standard infos
-			    "Allocation Group count:.......%"PRIu64"\n"
+			    "Allocation Group count:.......%" PRIu64 "\n"
 			    "Blocks per Allocation Group:..%u\n"
 			    "Allocation Group size:........%s\n"
-			    "First allocation block:.......%"PRIu64"\n"),
+			    "First allocation block:.......%" PRIu64 "\n"),
 	   szText, m_info.qwAllocCount, m_info.dwBlocksPerAlloc,
 	   formatSize(m_info.dwAllocSize,szTemp1), m_info.qwFirstAllocBlock);
     

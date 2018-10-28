@@ -272,7 +272,7 @@ char *formatSize2(QWORD qwSize, char *szText, int nMaxLen)
   
   if (qwSize < llKiloB) // In Bytes
     {
-      snprintf(szText, nMaxLen, i18n("%"PRId64" bytes"), qwSize);
+      snprintf(szText, nMaxLen, i18n("%" PRId64 " bytes"), qwSize);
     }
   else if (qwSize < llMegaB) // In KiloBytes
     {
@@ -311,7 +311,7 @@ char *formatSizeNoGui(QWORD qwSize, char *szText, int nMaxLen)
 
   if (qwSize < llKiloB) // In Bytes
     {
-      snprintf(szText, nMaxLen, i18n("%"PRId64" Bytes"), qwSize);
+      snprintf(szText, nMaxLen, i18n("%" PRId64 " Bytes"), qwSize);
     }
   else if (qwSize < llMegaB) // In KiloBytes
     {

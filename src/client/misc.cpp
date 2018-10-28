@@ -211,7 +211,7 @@ void restoreMbr(char *szImageFile, COptions *options)
 	  image.closeReading(true);
           throw excep;
 	}
-      SNPRINTF(szTemp, "%.3u: %s [%"PRIu64" blocks]", i, mbrOriginal[i].szDevice, mbrOriginal[i].qwBlocksCount);
+      SNPRINTF(szTemp, "%.3u: %s [%" PRIu64 " blocks]", i, mbrOriginal[i].szDevice, mbrOriginal[i].qwBlocksCount);
       if (options->bBatchMode == false)
 	optGui.addMbr(szTemp, i);
       

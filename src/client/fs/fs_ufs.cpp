@@ -217,7 +217,7 @@ void CUfsPart::printfInformations()
 			    "Cylinder group size:..........%s\n"
 			    "Basic blocks per CG:..........%u\n"
 			    "Basic block size:.............%u\n"
-			    "Data frags count:.............%"PRIu64"\n"),
+			    "Data frags count:.............%" PRIu64 "\n"),
 	   szText, m_info.dwCylinderGroupsCount, 
 	   formatSize(m_info.dwCylinderGroupSize*m_info.dwBasicBlockSize,szTemp1),
 	   m_info.dwCylinderGroupSize, m_info.dwBasicBlockSize, m_info.qwDataFrags);

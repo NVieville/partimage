@@ -301,7 +301,7 @@ int main(int argc, char *argv[])
 	  case 'V': // split image into multiple files
 	  
 	    options.qwSplitSize = (QWORD)atol(optarg) * 1024 * 1024;
-	    fprintf (stderr, i18n("Volume size: %"PRIu64" bytes (%ld MiB)\n"),
+	    fprintf (stderr, i18n("Volume size: %" PRIu64 " bytes (%ld MiB)\n"),
 		     options.qwSplitSize, atol(optarg));
 	    break;
 	  
