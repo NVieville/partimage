@@ -514,6 +514,7 @@ void CImageDisk::openWriting() // [Main-Thread]
 #endif
   int flags;
   int nRes;
+  int ret=0;
   char szShortName[32]; // DOS short filenames
   char szPathDir[MAXPATHLEN];
 
@@ -527,7 +528,11 @@ void CImageDisk::openWriting() // [Main-Thread]
   SNPRINTF(szShortName, "pi%.8x", (DWORD)generateIdentificator());
   extractFilepathFromFullPath(m_szImageFilename, szPathDir); // filepath without filename
   if (access(szPathDir, R_OK) == -1) mkdir(szPathDir, 0755);
-  snprintf(m_szSpaceFilename, MAXPATHLEN, "%s/%8s.tmp", szPathDir, szShortName);
+  ret = snprintf(m_szSpaceFilename, MAXPATHLEN, "%s/%8s.tmp", szPathDir, szShortName);
+  if (ret < 0) {
+    showDebug(3, "SNPRINTF error: character string may be truncated \"%s/%8s.tmp\"\n", szPathDir, szShortName);
+  }
+
   showDebug(1, "TEMP=[%s]\n", m_szSpaceFilename);
 
   if (strcmp(m_szImageFilename, "stdout"))

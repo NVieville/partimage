@@ -45,8 +45,15 @@
 
 #define showDebug(level, format, args...) showDebugMsg(g_fDebug, level, __FILE__, __FUNCTION__, __LINE__, format, ## args)
 #define THROW(nError, args...) showDebug(1, "THROW: %d\n", nError),throw new CExceptions(__FUNCTION__, nError, ## args)
-#define SNPRINTF(szDest, szFormat, args...) snprintf(szDest, sizeof(szDest)-1, szFormat, ## args),szDest[sizeof(szDest)-1]=0 // allow to use this macro in 'else'
-
+//#define SNPRINTF(szDest, szFormat, args...) snprintf(szDest, sizeof(szDest)-1, szFormat, ## args),szDest[sizeof(szDest)-1]=0 // allow to use this macro in 'else'
+#define SNPRINTF(szDest, szFormat, args...) do { \
+      int ret = snprintf(szDest, sizeof(szDest)-1, szFormat, ## args); \
+      if (ret < 0) { \
+        showDebug(3, "SNPRINTF error: character string may be truncated \"%s\"\n", szFormat); \
+        szDest[sizeof(szDest)-1]=0; \
+      } \
+} while(0)
+		
 #define COPYBUF_SIZE 262144 // 256 KiB
 #define MAX_FREE_BLOCKS_SKIPPED 2048
 
