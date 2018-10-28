@@ -43,7 +43,7 @@ CNetClient::CNetClient(bool bMustLogin, bool bUseSSL):CNet()
     {
       showDebug(3, "initializing client ssl\n");
       SSLeay_add_ssl_algorithms();
-      meth = SSLv2_client_method();
+      meth = SSLv23_client_method();
       SSL_load_error_strings();
       ctx = SSL_CTX_new(meth);
       if (!ctx)
