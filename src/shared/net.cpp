@@ -139,7 +139,7 @@ void CNet::CopyProtoVersion(char *szDestBufData, int nDestBufSize, char *szBanne
             snprintf(szDestBufData, nDestBufSize, "PiMgNet001");
 }
 
-bool CNet::CompareBanner(char *szBanner1, char *szBanner2, char *szErrorBufDat, int nErrorBufSize)
+int CNet::CompareBanner(char *szBanner1, char *szBanner2, char *szErrorBufDat, int nErrorBufSize)
 {
     char szVersion1[BANNER_SIZE];
     char szVersion2[BANNER_SIZE];

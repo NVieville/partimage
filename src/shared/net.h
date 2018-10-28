@@ -74,7 +74,7 @@ public:
 
   char * Banner(bool bUseSSL, bool bMustLogin);
   void CopyProtoVersion(char *szDestBufData, int nDestBufSize, char *szBanner);
-  bool CompareBanner(char *szBanner1, char *szBanner2, char *szErrorBufDat, int nErrorBufSize);
+  int CompareBanner(char *szBanner1, char *szBanner2, char *szErrorBufDat, int nErrorBufSize);
 };
 
 #endif // _NET_H_
