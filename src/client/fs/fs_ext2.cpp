@@ -206,7 +206,7 @@ void CExt2Part::readBitmap(COptions *options) // FULLY WORKING
   DWORD i, j;
   CExt2GroupDesc *desc;
   int nRes;
-  DWORD dwBlocksInThisGroup;
+  DWORD dwBlocksInThisGroup __attribute__ ((unused));
   DWORD dwBootBlocks;
   char *cTempBitmap;
   DWORD dwBit, dwByte;

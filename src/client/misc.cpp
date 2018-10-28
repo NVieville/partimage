@@ -1772,7 +1772,7 @@ int isDevfsEnabled()
 {
   FILE *fPart;
   char cBuffer[32768];
-  char *cPtr;
+  char *cPtr __attribute__ ((unused));
   int nSize;
   
   errno = 0;

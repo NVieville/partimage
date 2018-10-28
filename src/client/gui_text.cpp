@@ -35,7 +35,7 @@
 void CRestoreMbrWindow::addHardDisk(char *szText, DWORD dwNumber)
 {
   BEGIN;
-  newtListboxAppendEntry(m_list1, szText, (void*)dwNumber);
+  newtListboxAppendEntry(m_list1, szText, (void*)(uintptr_t)dwNumber);
   RETURN;
 }
 
@@ -44,7 +44,7 @@ void CRestoreMbrWindow::addHardDisk(char *szText, DWORD dwNumber)
 void CRestoreMbrWindow::addMbr(char *szText, DWORD dwNumber)
 {
   BEGIN;
-  newtListboxAppendEntry(m_list2, szText, (void*)dwNumber);
+  newtListboxAppendEntry(m_list2, szText, (void*)(uintptr_t)dwNumber);
   RETURN;
 }
 
@@ -134,7 +134,7 @@ char *processHardDrive(char *cPtr, newtComponent editPartition)
   char cFormat[1024];
   char szTemp[1024];
   char *szDeviceName;
-  int nRes;
+  int nRes __attribute__ ((unused));
   QWORD qwSize;
 
   cOldPtr = cPtr;

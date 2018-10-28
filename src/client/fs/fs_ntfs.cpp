@@ -425,7 +425,7 @@ int CNtfsPart::readFileRecord(BYTE *cRecordData, CNtfsRunList *runlist, QWORD *q
   WORD nOffsetSequenceAttribute;
   DWORD dwAttribType;
   DWORD dwAttribLen;
-  bool bAttribResident;
+  bool bAttribResident __attribute__ ((unused));
   int nRes;
   size_t sRet __attribute__ ((unused)) ;
   
@@ -487,8 +487,8 @@ int CNtfsPart::readDataAttribute(BYTE *cAttribData, CNtfsRunList *runlist, QWORD
   if(bAttribResident)
     {
       // TODO: decode resident data
-      WORD nAttrSize;
-      BYTE *cDataResident;
+      WORD nAttrSize __attribute__ ((unused));
+      BYTE *cDataResident __attribute__ ((unused));
       nAttrSize = NTFS_GETU16(cAttribData+0x10);
       cDataResident = cAttribData+NTFS_GETU16(cAttribData+0x14);
       /*WORD nOffsetOfStream;
@@ -756,7 +756,7 @@ int CNtfsPart::checkFilenameForRecordIs(BYTE *cRecordData, const char *szFilenam
   WORD nOffsetSequenceAttribute;
   DWORD dwAttribType;
   DWORD dwAttribLen;
-  bool bAttribResident;
+  bool bAttribResident __attribute__ ((unused));
   int nRes;
   
   nOffsetSequenceAttribute = NTFS_GETU16(cRecordData+0x14);

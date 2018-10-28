@@ -33,6 +33,7 @@
 // if not run as root, we can't change them
 CPrivs::CPrivs(const char * _user)
 {
+  int iRes __attribute__ ((unused));
   struct passwd * password = (struct passwd *) malloc(sizeof(struct passwd));
 
   switched = false;
@@ -40,8 +41,8 @@ CPrivs::CPrivs(const char * _user)
     {
 // we can't use showDebug since not yet opened
       user = getuid();
-      setuid(user);
-      seteuid(user);
+      iRes = setuid(user);
+      iRes = seteuid(user);
     }
   else
     {
@@ -53,9 +54,9 @@ CPrivs::CPrivs(const char * _user)
           switched = true;
           user = password -> pw_uid;
           group = password -> pw_gid;
-          setuid(0);
-          setegid(group);              // we're now _group
-          seteuid(user);              // we're now _user
+          iRes = setuid(0);
+          iRes = setegid(group);             // we're now _group
+          iRes = seteuid(user);              // we're now _user
         }
       else
         {
@@ -73,24 +74,27 @@ CPrivs::CPrivs(const char * _user)
 // be root 
 void CPrivs::Root()
 {
+  int iRes __attribute__ ((unused));
   showDebug(4, "Switched to Root\n");
-  seteuid(0);
+  iRes = seteuid(0);
 }
 
 // switch to unpriv user
 void CPrivs::User()
 {
+  int iRes __attribute__ ((unused));
   showDebug(4, "Switched to user\n");
-  seteuid(user);
+  iRes = seteuid(user);
 }
 
 // go to unpriv user without way back
 void CPrivs::ForceUser()
 {
+  int iRes __attribute__ ((unused));
   showDebug(4, "forced unpriv user\n");
-  seteuid(0);
-  setuid(user);
-  seteuid(user);
+  iRes = seteuid(0);
+  iRes = setuid(user);
+  iRes = seteuid(user);
 }
 
 #else // MUST_CHEUID

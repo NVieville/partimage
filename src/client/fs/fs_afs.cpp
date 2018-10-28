@@ -49,14 +49,14 @@ void CAfsPart::readBitmap(COptions *options)
   //DWORD i, j, k;
   int nRes;
   //char cBuffer[8192];
-  DWORD dwWordsPerBlock;
-  DWORD dwBlocksPerGroup;
-  QWORD qwCurBlock;
+  //DWORD dwWordsPerBlock;  // Commented for GCC warnings
+  //DWORD dwBlocksPerGroup; // Commented for GCC warnings
+  //QWORD qwCurBlock;       // Commented for GCC warnings
 
   // init
-  dwWordsPerBlock = m_header.qwBlockSize/4;
-  qwCurBlock = 0LL;
-  dwBlocksPerGroup = m_info.dwBlockPerGroup / (m_header.qwBlockSize * 8);
+  //dwWordsPerBlock = m_header.qwBlockSize/4; // Commented for GCC warnings 
+  //qwCurBlock = 0LL;                         // Commented for GCC warnings
+  //dwBlocksPerGroup = m_info.dwBlockPerGroup / (m_header.qwBlockSize * 8); // Commented for GCC warnings
 
   // init bitmap size
   nRes = m_bitmap.init(m_header.qwBitmapSize);
