@@ -546,7 +546,9 @@ static fde *dir_here(newtComponent lb, char *dr)
 				dp=(fde*)malloc(sizeof(fde));
 				dp->name=(char*)malloc(strlen(dr)+2+strlen(namelist[i]->d_name));
 				strcpy(dp->name,dr);  
-				if(strlen(dr) > 1) strcat(dp->name,"/"); strcat(dp->name,namelist[i]->d_name);
+				if(strlen(dr) > 1) 
+					strcat(dp->name,"/"); 
+				strcat(dp->name,namelist[i]->d_name);
 				stat(dp->name,&dp->st);
 				tmm=localtime(&dp->st.st_mtime);
 				ttt=tt-dp->st.st_mtime;
