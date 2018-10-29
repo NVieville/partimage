@@ -43,6 +43,7 @@
 
 #include <zlib.h> // gzip compression
 #include <bzlib.h> // bzip2 compression
+#include "lzma_file.h" // lzma compression
 
 CParam g_param;
 
@@ -136,6 +137,7 @@ CImage::CImage(COptions * options)
   m_fImageFile = NULL;	
   m_gzImageFile = NULL;
   m_bzImageFile = NULL;
+  m_lzmaImageFile = NULL;
 
   RETURN;
 }
@@ -398,6 +400,10 @@ void CImage::read(char *cBuf, DWORD dwLength, bool bUpdateCRC)
     nRes = gzread(m_gzImageFile, cBuf, dwLength);
   else if (m_options.dwCompression == COMPRESS_BZIP2)
     nRes = BZ2_bzread(m_bzImageFile, cBuf, dwLength);
+  else if (m_options.dwCompression == COMPRESS_LZMA) {
+    lzma_ret ret;
+    nRes = lzma_read(&ret, m_lzmaImageFile, (uint8_t *)cBuf, dwLength);
+  }
   else
     THROW(ERR_COMP);
 
@@ -580,6 +586,10 @@ void CImage::closeReading(bool bForceExit /*  = false */)
     }
   else if (m_options.dwCompression == COMPRESS_BZIP2) // Bzip2 compression
     BZ2_bzclose(m_bzImageFile);
+  else if (m_options.dwCompression == COMPRESS_LZMA) { // Lzma compression
+    lzma_ret ret;
+    lzma_close(&ret, m_lzmaImageFile);
+  }
   if (nRes)
     THROW(ERR_ERRNO, errno);
 
@@ -611,6 +621,10 @@ void CImage::closeWriting()
     nRes = gzclose(m_gzImageFile);
   else if (m_options.dwCompression == COMPRESS_BZIP2) // Bzip2 compression
     BZ2_bzclose(m_bzImageFile);
+  else if (m_options.dwCompression == COMPRESS_LZMA) { // Lzma compression
+    lzma_ret ret;
+    lzma_close(&ret, m_lzmaImageFile);
+  }
   if (nRes)
     THROW(ERR_ERRNO, errno);
   
@@ -1111,6 +1125,15 @@ void CImage::openReading(CVolumeHeader *vh /* = NULL */)
         THROW( errno);
       else
         showDebug(1, "bzip2 open\n");
+    }
+  else if (m_options.dwCompression == COMPRESS_LZMA) // Lzma compression
+    {
+      lzma_ret ret;
+      m_lzmaImageFile = lzma_open(&ret, NULL, m_nFdImage, -1);
+      if (m_lzmaImageFile == NULL)
+        THROW( errno);
+      else
+        showDebug(1, "lzma open\n");
     }
   else
     THROW(ERR_COMP);

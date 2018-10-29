@@ -7,7 +7,7 @@ EXTRA_DIST = access.cpp common.cpp exceptions.cpp image_disk.cpp \
 
 # Pickup header files here so automake knows about them.
 # useful at least for 'make dist'
-noinst_HEADERS = access.h common.h errors.h exceptions.h image_disk.h \
+noinst_HEADERS = access.h common.h errors.h exceptions.h lzma_file.h image_disk.h \
                  messages.h net.h structures.h privs.h endianess.h pathnames.h
 noinst_LIBRARIES = libshared.a
 
@@ -22,6 +22,7 @@ libshared_a_SOURCES =    \
         access.cpp       \
         net.cpp          \
         exceptions.cpp   \
+        lzma_file.cpp    \
         messages.cpp     \
         privs.cpp        \
         image_disk.cpp

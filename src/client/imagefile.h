@@ -43,6 +43,7 @@ class CImage
   FILE *m_fImageFile;
   gzFile m_gzImageFile;
   BZFILE *m_bzImageFile;
+  lzma_FILE *m_lzmaImageFile;
 
   int m_nFdImage;
 

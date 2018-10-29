@@ -153,6 +153,7 @@ extern bool g_bSigKill;
 #define COMPRESS_GZIP    1
 #define COMPRESS_BZIP2   2	
 #define COMPRESS_LZO     3
+#define COMPRESS_LZMA    4
 
 // ENCRYPTION
 #define ENCRYPT_NONE     0

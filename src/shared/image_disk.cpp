@@ -331,16 +331,31 @@ int CImageDisk::getCompressionLevelForImage(char *szFilename) // [Main-Thread]
 checkBzip2:
   bzImageFile = BZ2_bzopen(szFilename, "rb");
   if (bzImageFile == NULL)
-    goto checkNone;
+    goto checkLzma;
   dwRes = BZ2_bzread(bzImageFile, &headVolume, sizeof(CVolumeHeader));
   BZ2_bzclose(bzImageFile);
   if (dwRes != sizeof(CVolumeHeader))
-    goto checkNone;
+    goto checkLzma;
   if (strncmp(headVolume.szMagicString, szLabel, strlen(szLabel)) == 0)
     RETURN_int(COMPRESS_BZIP2);
 
   showDebug(3, "TRACE_003\n");
   
+  // ------ 1.1 Check for lzma compression
+checkLzma:
+  {	// Make sure it's lzma, otherwise the decoder crashes
+    size_t len __attribute__ ((unused));
+    uint8_t b[4];
+    FILE *f = fopen(szFilename, "rb");
+    len = fread(b, 4, 1, f);
+    fclose(f);
+    if (b[0] != 0x5d || b[1] != 0x00 || b[2] != 0x00)
+      goto checkNone;
+    RETURN_int(COMPRESS_LZMA);
+  }
+
+  showDebug(3, "TRACE_003\n");
+
   // ------ 2. Check for no compression
  checkNone:
   fImageFile = fopen(szFilename, "rb");

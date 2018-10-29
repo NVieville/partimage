@@ -902,6 +902,10 @@ void CRestoringWindow::showImageFileInfo(char *szImageFile, int nCompressionMode
 	  SNPRINTF(szTemp, i18n("Compression level:................lzo"));
           SNPRINTF(szTemp2, i18n("lzo"));
 	  break;
+	case COMPRESS_LZMA:
+	  SNPRINTF(szTemp, i18n("Compression level:................lzma"));
+          SNPRINTF(szTemp2, i18n("lzma"));
+	  break;
 	default:
           memset(szTemp2, 0, sizeof(szTemp2));
         SNPRINTF(szTemp3, i18n("Compression level:................%s"),szTemp2);

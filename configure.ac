@@ -94,6 +94,8 @@ if test "$efence_support" = "yes" ; then
 fi
 AC_CHECK_LIB([bz2], [BZ2_bzopen], [],
    AC_MSG_ERROR([*** bzip2 library (libbz2) not found or too old: version 1.0.0 or more recent is need]))
+AC_CHECK_LIB([lzma], [lzma_auto_decoder], [],
+   AC_MSG_ERROR([*** liblzma library not found or too old]))
 AC_CHECK_LIB([newt], [newtCenteredWindow], [],
    AC_MSG_ERROR([*** newt library (libnewt) not found]))
 AC_CHECK_LIB([z], [gzwrite], [],

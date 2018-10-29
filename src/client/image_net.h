@@ -26,6 +26,7 @@
 
 #include <zlib.h> // gzip compression
 #include <bzlib.h> // bzip2 compression
+#include "lzma_file.h" // lzma compression
 #include <pthread.h>
 
 // ================================================
