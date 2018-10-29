@@ -22,9 +22,20 @@
 // =======================================================
 CPartimagedClients::CPartimagedClients()
 {
+  unsigned int next = 0;
+
   showDebug(10, "mutex init for clients\n");
   pthread_mutex_init(&mClients, &mClientsAttr);
   Clients = new CIdefRemote[g_uiNbClients+1]; // one more for first client to reject
+  pthread_mutex_lock(&mClients);
+  while (next < g_uiNbClients)
+    {
+      Clients[next].Sock = 0;
+      Clients[next].Present = false;
+      Clients[next].MyPid = 0;
+      next++;
+    }
+  pthread_mutex_unlock(&mClients);
 }
 
 // =======================================================
