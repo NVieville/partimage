@@ -20,6 +20,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <pwd.h>
+#include <grp.h>
 
 #ifdef HAVE_CONFIG_H
   #include <config.h>
@@ -41,6 +42,9 @@ CPrivs::CPrivs(const char * _user)
     {
 // we can't use showDebug since not yet opened
       user = getuid();
+      group = getgid();
+      setgroups(0, NULL);
+      iRes = setegid(group);
       iRes = setuid(user);
       iRes = seteuid(user);
     }
@@ -54,8 +58,9 @@ CPrivs::CPrivs(const char * _user)
           switched = true;
           user = password -> pw_uid;
           group = password -> pw_gid;
-          iRes = setuid(0);
+          setgroups(0, NULL);
           iRes = setegid(group);             // we're now _group
+          iRes = setuid(0);
           iRes = seteuid(user);              // we're now _user
         }
       else
@@ -76,6 +81,8 @@ void CPrivs::Root()
 {
   int iRes __attribute__ ((unused));
   showDebug(4, "Switched to Root\n");
+  setgroups(0, NULL);
+  iRes = setegid(0);
   iRes = seteuid(0);
 }
 
@@ -84,6 +91,8 @@ void CPrivs::User()
 {
   int iRes __attribute__ ((unused));
   showDebug(4, "Switched to user\n");
+  setgroups(0, NULL);
+  iRes = setegid(group);
   iRes = seteuid(user);
 }
 
@@ -92,6 +101,8 @@ void CPrivs::ForceUser()
 {
   int iRes __attribute__ ((unused));
   showDebug(4, "forced unpriv user\n");
+  setgroups(0, NULL);
+  iRes = setegid(group);
   iRes = seteuid(0);
   iRes = setuid(user);
   iRes = seteuid(user);
