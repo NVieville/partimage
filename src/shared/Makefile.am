@@ -9,24 +9,24 @@ EXTRA_DIST = access.cpp common.cpp exceptions.cpp image_disk.cpp \
 # useful at least for 'make dist'
 noinst_HEADERS = access.h common.h errors.h exceptions.h image_disk.h \
                  messages.h net.h structures.h privs.h endianess.h pathnames.h
-INCLUDES = 			\
-    -I$(top_srcdir)         	\
-    -I$(top_srcdir)/src/client	\
-    -I$(top_srcdir)/src/shared  \
-    -I/usr/include/slang
-
 noinst_LIBRARIES = libshared.a
 
-libshared_a_SOURCES =		\
-	common.cpp		\
-	access.cpp		\
-	net.cpp			\
-	exceptions.cpp		\
-	messages.cpp		\
-	privs.cpp		\
-	image_disk.cpp		
+AM_CPPFLAGS =                    \
+    -I$(top_srcdir)              \
+    -I$(top_srcdir)/src/client   \
+    -I$(top_srcdir)/src/shared   \
+    -I/usr/include/slang
+
+libshared_a_SOURCES =    \
+        common.cpp       \
+        access.cpp       \
+        net.cpp          \
+        exceptions.cpp   \
+        messages.cpp     \
+        privs.cpp        \
+        image_disk.cpp
 
 DEFS=@DEFS@ -DLOCALEDIR=\"${localedir}\" -D_REENTRANT -D_FILE_OFFSET_BITS=64
-CPPFLAGS=@CPPFLAGS@ -Wall
+AM_CPPFLAGS += -Wall
 
 MAINTAINERCLEANFILES = Makefile.in
