@@ -1894,8 +1894,8 @@ char *decodePartitionEntry(char *cPtr, int *nMajor, int *nMinor,
     }
   *nPartNum = atoi(cTemp);
   
-  showDebug(9, "entry found: %s %d %d %d %d\n", szDevice, nMajor, nMinor,
-    nBlocks, nPartNum); 
+  showDebug(9, "entry found: %s %d %d %d %d\n", szDevice, *nMajor, *nMinor,
+    *nBlocks, *nPartNum); 
  
   return cPtr;
 }
