@@ -15,9 +15,12 @@ AC_CANONICAL_SYSTEM
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([1.6 dist-bzip2])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
-AM_CONFIG_HEADER([config.h])
+AC_CONFIG_HEADER([config.h])
 
 AC_DEFINE(ENABLE_NLS, 1, [Enable translations])
+
+# Disable datarootdir check
+AC_DEFUN([AC_DATAROOTDIR_CHECKED])
 
 # Translations system
 AM_GNU_GETTEXT_VERSION([0.14.4])
