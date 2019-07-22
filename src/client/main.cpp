@@ -524,8 +524,8 @@ int main(int argc, char *argv[])
   if (argc - optind == 3) // commands with 2 parameters
     {
       showDebug(8, "full cmdline with 2 param\n"); 
-      strncpy(szDevice, argv[optind+1], MAX_DEVICENAMELEN);
-      strncpy(szImageFile, argv[optind+2], MAXPATHLEN);
+      strncpy(szDevice, argv[optind+1], MAX_DEVICENAMELEN-1);
+      strncpy(szImageFile, argv[optind+2], MAXPATHLEN-1);
       
       if (strcmp(argv[optind], "save")==0) // save
 	nChoice = OPERATION_SAVE;

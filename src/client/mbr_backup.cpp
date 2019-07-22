@@ -67,14 +67,14 @@ int mbrGetInfoDir(char *szDevice, char *szDir)
 {
   BEGIN;
 
-  char szShort[256];
+  char szShort[NAME_MAX+1];
   int i;
 
   // ---- get the short name (ex: "/dev/hda -> hda")
   memset(szDir, 0, MAXPATHLEN);
-  memset(szShort, 0, 256);
+  memset(szShort, 0, NAME_MAX+1);
   for (i=strlen(szDevice); i && (szDevice[i] != '/'); i--);
-  strncpy(szShort, szDevice+i+1, 256);
+  strncpy(szShort, szDevice+i+1, NAME_MAX);
 
   // ---- get the directory
   if ((szShort[0] == 'h') && (szShort[1] == 'd')) // if an IDE device
@@ -220,7 +220,7 @@ int mbrGetData(char *szDevice, CMbr *mbr, DWORD dwBlocksCount)
 
   // ---- init
   memset(mbr, 0, sizeof(CMbr));
-  strncpy(mbr->szDevice, szDevice, MAX_DEVICENAMELEN);
+  strncpy(mbr->szDevice, szDevice, MAX_DEVICENAMELEN-1);
   mbr->qwBlocksCount = (QWORD)dwBlocksCount;
 
   // ---- copy data
