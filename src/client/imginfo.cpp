@@ -56,6 +56,7 @@ void imageInfoShowRegular(char *szText, int nMaxTextLen, CMainHeader *head, char
   char szFlags[2048];
   char szDescription[MAX_DESCRIPTION];
   char szEncryption[512];
+  struct portable_tm localDateCreate;
 
   // format flags
   if (head->dwMainFlags)
@@ -84,6 +85,8 @@ void imageInfoShowRegular(char *szText, int nMaxTextLen, CMainHeader *head, char
       break;
     }
   
+  memcpy(&localDateCreate, &head->dateCreate, sizeof(struct portable_tm));
+
   snprintf(szText, nMaxTextLen, i18n("Filesystem:............%s\n"
 				     "Description:...........%s\n"
 				     "Original device:.......%s\n"
@@ -101,7 +104,7 @@ void imageInfoShowRegular(char *szText, int nMaxTextLen, CMainHeader *head, char
 				     "- release:.............%s\n"
 				     "\n\n"), 
 	   head->szFileSystem, szDescription, head->szOriginalDevice, head->szFirstImageFilepath, 
-	   head->dwMainFlags, szFlags, asctime_portable(&head->dateCreate), formatSize(head->qwPartSize, cTemp), head->szHostname,
+	   head->dwMainFlags, szFlags, asctime_portable(&localDateCreate), formatSize(head->qwPartSize, cTemp), head->szHostname,
 	   head->szVersion, head->dwEncryptAlgo, szEncryption, head->dwMbrCount, head->szUnameMachine,
 	   head->szUnameSysname, head->szUnameRelease);
 }
