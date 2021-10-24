@@ -28,7 +28,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>
+#pragma GCC diagnostic push 
+#pragma GCC diagnostic ignored "-Wregister"
 #include <slang.h>
+#pragma GCC diagnostic pop
 
 extern bool g_bMustLogin;
 extern bool g_bUseSSL;

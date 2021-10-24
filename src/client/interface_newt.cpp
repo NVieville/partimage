@@ -21,7 +21,10 @@
 
 #define _FILE_OFFSET_BITS 64
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wregister"
 #include <slang.h>
+#pragma GCC diagnostic pop
 #include <newt.h>
 #include <stdlib.h>
 #include <string.h>
