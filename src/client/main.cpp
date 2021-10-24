@@ -550,7 +550,7 @@ int main(int argc, char *argv[])
       else if (strcmp(argv[optind], "rest_file")==0)
 	nChoice = OPERATION_REST_FILE;
 
-      strncpy(nChoice == OPERATION_REST_ALL || nChoice == OPERATION_SAVE_ALL ? szImageDir : szImageFile, argv[optind+1], MAXPATHLEN);      
+      strncpy(nChoice == OPERATION_REST_ALL || nChoice == OPERATION_SAVE_ALL ? szImageDir : szImageFile, argv[optind+1], MAXPATHLEN-1);
     }
   
   // check options
