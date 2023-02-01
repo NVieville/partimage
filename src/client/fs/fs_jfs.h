@@ -304,7 +304,7 @@ typedef union {
 		QWORD qwSelf; //pxd_t self;	/* 8: self */
 	} header;		/* (32) */
 
-	xad_t xad[XTPAGEMAXSLOT];	/* 16 * maxentry: xad array */
+	xad_t xad[XTROOTMAXSLOT];	/* 16 * maxentry: xad array */
 } xtpage_t;
 
 
