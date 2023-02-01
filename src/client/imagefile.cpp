@@ -120,7 +120,7 @@ CImage::CImage(COptions * options)
   memset(m_szMountFS, 0, MAXPATHLEN);
 
   // parse mount options
-  if (m_options.szAutoMount)
+  if (*m_options.szAutoMount)
     {
       char *cBegin = m_options.szAutoMount;
       int i;
@@ -650,7 +650,7 @@ int CImage::mountImageLocation()
   int nRes;
   BEGIN;
 
-  if ((m_options.szAutoMount) && (strlen(m_options.szAutoMount)) &&
+  if ((*m_options.szAutoMount) && (strlen(m_options.szAutoMount)) &&
        (!m_bIsMounted)) // if not already mounted
     {
       // warning
@@ -679,7 +679,7 @@ int CImage::umountImageLocation()
 {
   int nRes;
 
-  if ((m_options.szAutoMount) && (strlen(m_options.szAutoMount)) && (m_bIsMounted)) // if mounted
+  if ((*m_options.szAutoMount) && (strlen(m_options.szAutoMount)) && (m_bIsMounted)) // if mounted
     {
 //      debugWin("umount[%s]",m_szMountPoint);
       showDebug(1, "umount[%s]",m_szMountPoint);
@@ -1019,7 +1019,7 @@ void CImage::openReading(CVolumeHeader *vh /* = NULL */)
   // ---- ask for another path while the file is not found
   while (m_cid->doesFileExists(m_cid->get_szImageFilename()) == false)
     {
-      if ((m_options.szAutoMount) && (strlen(m_options.szAutoMount)))
+      if ((*m_options.szAutoMount) && (strlen(m_options.szAutoMount)))
         { // Automount enabled -> wrong volume inserted, ask for the right
           // one but don't change location
 	  nRes = g_interface -> msgBoxContinueCancel(
