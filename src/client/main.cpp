@@ -456,7 +456,7 @@ int main(int argc, char *argv[])
   // init CRC table
   initCrcTable(g_dwCrcTable);
 
-  if (!options.szFullyBatchMode || !strlen(options.szFullyBatchMode)) {
+  if (!*options.szFullyBatchMode || !strlen(options.szFullyBatchMode)) {
   // signal
   /*struct sigaction saOld, saNew;
     saNew.sa_handler = catch_sigint;
@@ -487,7 +487,7 @@ int main(int argc, char *argv[])
 
   // init interface
   showDebug(8, "initialize interface\n");
-  if (!options.szFullyBatchMode || !strlen(options.szFullyBatchMode))
+  if (!*options.szFullyBatchMode || !strlen(options.szFullyBatchMode))
     g_interface = new PARTIMAGE_INTERFACE(options.bBatchMode);
   else
     g_interface = new CInterfaceNone(options.szFullyBatchMode);
