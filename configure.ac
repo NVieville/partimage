@@ -6,16 +6,16 @@
 
 AC_REVISION([[$Revision: 1.4 $]])
 
-AC_PREREQ(2.59c)
+AC_PREREQ([2.71])
 
-AC_INIT([partimage], [0.6.10-beta])
+AC_INIT([partimage],[0.6.10-beta])
 AC_DEFINE([PACKAGE_NETPROTOVER], "PiMgNet001", [Define the version of the network protocol])
 
-AC_CANONICAL_SYSTEM
+AC_CANONICAL_TARGET
 AC_CONFIG_MACRO_DIR([m4])
 AM_INIT_AUTOMAKE([1.6 dist-bzip2])
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
-AC_CONFIG_HEADER([config.h])
+AC_CONFIG_HEADERS([config.h])
 
 AC_DEFINE(ENABLE_NLS, 1, [Enable translations])
 
@@ -23,14 +23,13 @@ AC_DEFINE(ENABLE_NLS, 1, [Enable translations])
 AC_DEFUN([AC_DATAROOTDIR_CHECKED])
 
 # Translations system
-AM_GNU_GETTEXT_VERSION([0.14.4])
 AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_REQUIRE_VERSION([0.21])
 
-AC_PROG_LIBTOOL
-AC_ISC_POSIX
+LT_INIT
+AC_SEARCH_LIBS([strerror],[cposix])
 AC_PROG_CC
-AM_PROG_CC_STDC
-AC_HEADER_STDC
+
 AC_PROG_AWK
 AC_PROG_CXX
 AC_PROG_CPP
@@ -219,7 +218,6 @@ AC_CHECK_SIZEOF(long int, 4)
 AC_CHECK_SIZEOF(unsigned long long, 8)
 
 # Checks for header files.
-AC_HEADER_STDC
 AC_CHECK_HEADERS([stdint.h stdlib.h stdio.h string.h strings.h getopt.h sys/types.h])
 
 dnl Check for PAM.
@@ -242,7 +240,7 @@ if test "$SSL" = "yes"; then
   fi
   AC_SUBST(opensslpath)
 
-  AC_CHECKING([ for SSL Library and Header files ... ])
+  AS_MESSAGE([checking  for SSL Library and Header files...])
   AC_SEARCH_HEADERS(rsa.h crypto.h x509.h pem.h ssl.h err.h,
     $SSL_HDR_DIR /usr/include/ssl /usr/include/openssl /usr/include,
     [  AC_CHECK_LIB(crypto, CRYPTO_free, [LIBS="$LIBS -lcrypto"],
