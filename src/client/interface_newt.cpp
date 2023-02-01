@@ -708,7 +708,7 @@ char *filesel(char *dr)
 						free(sel);
 				}
 			} 
-			if(sel && S_ISREG(sel->st.st_mode)) // is a directory
+			else if(sel && S_ISREG(sel->st.st_mode)) // is a directory
 			{
 				newtEntrySet(l1, sel->name, 1);
 			}
