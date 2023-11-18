@@ -35,9 +35,13 @@ public:
 
   virtual void Status(char * msg);
   virtual void show();
+  using CPartimagedInterface::SetState;
   virtual void SetState(int client, char * state);
+  using CPartimagedInterface::SetHostname;
   virtual void SetHostname(int client, char * state);
+  using CPartimagedInterface::SetLocation;
   virtual void SetLocation(int client, char * locate);
+  using CPartimagedInterface::SetSize;
   virtual void SetSize(int client, QWORD size);
   virtual void SetSize(int client, char * size);
 private:
